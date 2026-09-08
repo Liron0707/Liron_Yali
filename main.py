@@ -1,16 +1,17 @@
-# This is a sample Python script.
+import consts
+import game_field
+import screen
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+state = {
+    "is_window_open" : True,
+    "state": consts.RUNNING_STATE,
+}
 
+def main():
+    game_board = []
+    game_field.create_board(game_board)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    while state["is_window_open"] and state["state"] == consts.RUNNING_STATE:
+        screen.create_screen()
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+main()

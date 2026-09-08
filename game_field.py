@@ -2,7 +2,6 @@ import random
 
 import consts
 
-game_board = []
 
 
 # prints the game board
@@ -27,12 +26,14 @@ def create_board(game_board):
             game_board[i].append(consts.EMPTY)
 
 
+# sets the flag in the board
 def set_flag_on_board(game_board):
     flag_row = consts.BOARD_ROWS - consts.FLAG_ROWS
     flag_col = consts.BOARD_COLS - consts.FLAG_COLS
     for row in range(flag_row, consts.BOARD_ROWS):
         for col in range(flag_col, consts.BOARD_COLS):
             game_board[row][col] = consts.FLAG
+
 
 # marks the mine in the board
 def mark_mine_on_board(game_board, mine_cell):
@@ -46,19 +47,32 @@ def set_mines_on_board(game_board):
     mine_marked = 0
     while mine_marked < consts.MINES_COUNT:
         row = random.randint(0, consts.BOARD_ROWS - consts.FLAG_ROWS - 1)
-        col = random.randint(0, consts.BOARD_COLS - consts.FLAG_COLS -  1)
+        col = random.randint(0, consts.BOARD_COLS - consts.FLAG_COLS - 1)
         if row + consts.MINE_ROWS < consts.BOARD_ROWS and col + consts.MINE_COLS < consts.BOARD_COLS:
             mark_mine_on_board(game_board, [row, col])
-            mine_marked+=1
+            mine_marked += 1
             print([row, col])
-        else:
-            print("BAD",[row, col])
 
 
 
-#def is_touching_flag()
+# returns true if the soldier touches the flag
+def is_touching_flag(game_board, soldier_cell):
+    for row in range(soldier_cell[0],
+                     soldier_cell[0] + consts.SOLDIER_BODY_ROWS):
+        for col in range(soldier_cell[1],
+                         soldier_cell[1] + consts.SOLDIER_COLS):
+            if game_board[row][col] == consts.FLAG:
+                return True
 
-create_board(game_board)
-set_flag_on_board(game_board)
-set_mines_on_board(game_board)
-print_matrix(game_board)
+
+# returns true if the soldier touches a mine
+def is_touching_mine(game_board, soldier_cell):
+    for row in range(soldier_cell[0] + consts.SOLDIER_BODY_ROWS, soldier_cell[
+                                                                     0] + consts.SOLDIER_BODY_ROWS + consts.SOLDIER_FEET_ROWS):
+        for col in range(soldier_cell[1],
+                         soldier_cell[1] + consts.SOLDIER_COLS):
+            if game_board[row][col] == consts.MINE:
+                return True
+    return False
+
+

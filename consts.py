@@ -27,3 +27,6 @@ MINE = "mine"
 
 WELCOME_MESSAGE = "Welcome to The Flag game.\n Have Fun!"
 
+RUNNING_STATE = 1
+LOSE_STATE = 2
+WIN_STATE = 3
