@@ -42,17 +42,18 @@ def mark_mine_on_board(game_board, mine_cell):
             game_board[row][col] = consts.MINE
 
 
-# sets the mines on the board
+# sets the mines on the board and returns the list of mine starting cells
 def set_mines_on_board(game_board):
     mine_marked = 0
+    mine_list = []
     while mine_marked < consts.MINES_COUNT:
         row = random.randint(0, consts.BOARD_ROWS - consts.FLAG_ROWS - 1)
         col = random.randint(0, consts.BOARD_COLS - consts.FLAG_COLS - 1)
         if row + consts.MINE_ROWS < consts.BOARD_ROWS and col + consts.MINE_COLS < consts.BOARD_COLS:
             mark_mine_on_board(game_board, [row, col])
+            mine_list.append([row, col])
             mine_marked += 1
-            print([row, col])
-
+    return mine_list
 
 
 # returns true if the soldier touches the flag
