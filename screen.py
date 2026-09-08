@@ -5,11 +5,12 @@ from sys import exit
 import os
 import consts
 import solider
+import random
 
 pygame.init()
 
 window = pygame.display.set_mode((consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
-pygame.display.set_caption("Yali and Liron for the win")
+pygame.display.set_caption("מפתיעים את ראש הממשלה")
 clock = pygame.time.Clock()
 
 
@@ -17,11 +18,29 @@ clock = pygame.time.Clock()
 flag_image = pygame.image.load(os.path.join("bin","sara.PNG"))
 flag_image = pygame.transform.scale(flag_image, (consts.FLAG_WIDTH, consts.FLAG_HEIGHT))
 
+spray_image = pygame.image.load(os.path.join("bin","spray.PNG"))
+spray_image = pygame.transform.scale(spray_image, (consts.GRASS_WIDTH, consts.GRASS_HEIGHT))
 
+
+#the func returns a list of tuples for where to put the "grass"
+def choose_random_place_grass():
+    places = []
+    for i in range(consts.MINES_COUNT):
+        row = random.randint(0, consts.BOARD_ROWS - consts.FLAG_ROWS - 1)
+        col = random.randint(0, consts.BOARD_COLS - consts.FLAG_COLS - 1)
+        places.append((row, col))
+    return places
+
+
+
+
+#the func draw on the board the objects
 def draw():
     window.fill("lightpink")
     window.blit(solider.player_image, solider.player)
-    window.blit(flag_image, flag)
+    window.blit(flag_image, (consts.WINDOW_WIDTH-consts.FLAG_WIDTH, consts.WINDOW_HEIGHT-consts.FLAG_HEIGHT))
+    window.blit(spray_image,)
+
 
 def create_screen():
     while True:
