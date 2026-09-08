@@ -12,7 +12,7 @@ player = pygame.Rect(50,50,consts.PLAYER_WIDTH,consts.PLAYER_HEIGHT) #pygame obj
 pygame.display.set_caption("Yali and Liron for the win")
 clock = pygame.time.Clock()
 
-background = pygame.image.load("background.png").convert()
+
 
 def draw():
     window.fill("lightpink")
@@ -48,3 +48,4 @@ def create_screen():
             draw()
             pygame.display.update()
             clock.tick(60)
+
