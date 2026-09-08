@@ -18,5 +18,9 @@ MINES_COUNT = 20
 MINE_ROWS = 1
 MINE_COLS = 3
 
+EMPTY = "empty"
+FLAG = "flag"
+MINE = "mine"
+
 WELCOME_MESSAGE = "Welcome to The Flag game.\n Have Fun!"
 
