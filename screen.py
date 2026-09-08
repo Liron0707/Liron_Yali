@@ -21,6 +21,7 @@ flag_image = pygame.transform.scale(flag_image, (consts.FLAG_WIDTH, consts.FLAG_
 def draw():
     window.fill("lightpink")
     window.blit(solider.player_image, solider.player)
+    window.blit(flag_image, flag)
 
 def create_screen():
     while True:
