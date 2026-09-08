@@ -35,18 +35,16 @@ def choose_random_place_grass():
     places = []
     counter = 0
     while counter < consts.MINES_COUNT:
-        print(consts.WINDOW_WIDTH, consts.GRASS_HEIGHT * consts.CELL_SIZE)
-        print(consts.WINDOW_HEIGHT, consts.GRASS_WIDTH * consts.CELL_SIZE)
-        row = random.randint(0 , consts.WINDOW_HEIGHT)
-        col = random.randint(0,consts.WINDOW_WIDTH)
+        row = random.randint(0 , consts.WINDOW_WIDTH)
+        col = random.randint(0,consts.WINDOW_HEIGHT)
         while True:
-            if row > consts.PLAYER_HEIGHT and col > consts.PLAYER_WIDTH and row < consts.WINDOW_HEIGHT - consts.GRASS_HEIGHT and col < consts.WINDOW_WIDTH - consts.GRASS_WIDTH:
+            if row > consts.PLAYER_HEIGHT and col > consts.PLAYER_WIDTH and row < consts.WINDOW_WIDTH - consts.GRASS_HEIGHT and col < consts.WINDOW_HEIGHT - consts.GRASS_WIDTH:
                 places.append((row, col))
                 counter +=1
                 break
             else:
-                row = random.randint(0, consts.WINDOW_HEIGHT)
-                col = random.randint(0, consts.WINDOW_WIDTH)
+                row = random.randint(0, consts.WINDOW_WIDTH)
+                col = random.randint(0, consts.WINDOW_HEIGHT)
     return places
 
 
@@ -73,14 +71,13 @@ def create_screen():
                 exit()
 
             if event.type == pygame.KEYDOWN:  # key was pressed
-                print(solider.player.x, solider.player.y)
-                if event.key == pygame.K_UP:
+                if event.key == pygame.K_UP and solider.player.y -consts.CELL_SIZE>=0:
                     solider.player.y -= consts.CELL_SIZE  # y is used to move objects
-                if event.key == pygame.K_DOWN:
+                if event.key == pygame.K_DOWN and solider.player.y + consts.PLAYER_HEIGHT + consts.CELL_SIZE<=consts.WINDOW_HEIGHT:
                     solider.player.y += consts.CELL_SIZE
-                if event.key == pygame.K_LEFT:
+                if event.key == pygame.K_LEFT and solider.player.x -consts.CELL_SIZE>=0:
                     solider.player.x -= consts.CELL_SIZE
-                if event.key == pygame.K_RIGHT:
+                if event.key == pygame.K_RIGHT and solider.player.x + consts.PLAYER_WIDTH+consts.CELL_SIZE<=consts.WINDOW_WIDTH:
                     solider.player.x += consts.CELL_SIZE
             # keys = pygame.key.get_pressed()
             # if keys[pygame.K_LEFT]:
