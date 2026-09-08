@@ -23,27 +23,34 @@ spray_image = pygame.image.load(os.path.join("bin","spray.PNG"))
 spray_image = pygame.transform.scale(spray_image, (consts.GRASS_WIDTH, consts.GRASS_HEIGHT))
 
 
+class Spray(pygame.Rect):
+    def __init__(self, x, y,):
+        pygame.Rect.__init__(self, x, y, consts.GRASS_WIDTH, consts.GRASS_HEIGHT)
+        self.image = spray_image
+
+
 #the func returns a list of tuples for where to put the "grass"
 def choose_random_place_grass():
     places = []
     for i in range(consts.MINES_COUNT):
-        row = random.randint(0, consts.WINDOW_WIDTH - consts.FLAG_ROWS - 1)
-        col = random.randint(0, consts.WINDOW_HEIGHT - consts.FLAG_COLS - 1)
-        #print(row, col)
+        row = random.randint(consts.SOLDIER_ROWS, consts.WINDOW_WIDTH - consts.FLAG_ROWS - 1)
+        col = random.randint(consts.SOLDIER_COLS, consts.WINDOW_HEIGHT - consts.FLAG_COLS - 1)
         places.append((row, col))
     return places
 
 
 
+places = choose_random_place_grass()
 
 #the func draw on the board the objects
 def draw():
     window.fill("lightpink")
     window.blit(solider.player_image, solider.player)
     window.blit(flag_image, (consts.WINDOW_WIDTH-consts.FLAG_WIDTH, consts.WINDOW_HEIGHT-consts.FLAG_HEIGHT))
-    places = choose_random_place_grass()
-    #for i in places:
-        #window.blit(spray_image,i)
+
+    for i in places:
+        spray = Spray(i[0],i[1])
+        window.blit(spray_image,spray)
 
 
 def create_screen():
