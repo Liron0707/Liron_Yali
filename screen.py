@@ -62,7 +62,6 @@ def draw():
         spray = Spray(i[0], i[1])
         window.blit(spray_image, spray)
 
-
 def create_screen():
     while True:
         for event in pygame.event.get():
