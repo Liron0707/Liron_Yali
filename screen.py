@@ -14,74 +14,84 @@ window = pygame.display.set_mode((consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
 pygame.display.set_caption("מפתיעים את ראש הממשלה")
 clock = pygame.time.Clock()
 
+flag_image = pygame.image.load(os.path.join("bin", "sara.PNG"))
+flag_image = pygame.transform.scale(flag_image,
+                                    (consts.FLAG_WIDTH, consts.FLAG_HEIGHT))
 
-
-flag_image = pygame.image.load(os.path.join("bin","sara.PNG"))
-flag_image = pygame.transform.scale(flag_image, (consts.FLAG_WIDTH, consts.FLAG_HEIGHT))
-
-spray_image = pygame.image.load(os.path.join("bin","spray.PNG"))
-spray_image = pygame.transform.scale(spray_image, (consts.GRASS_WIDTH, consts.GRASS_HEIGHT))
+spray_image = pygame.image.load(os.path.join("bin", "spray.PNG"))
+spray_image = pygame.transform.scale(spray_image,
+                                     (consts.GRASS_WIDTH, consts.GRASS_HEIGHT))
 
 
 class Spray(pygame.Rect):
-    def __init__(self, x, y,):
-        pygame.Rect.__init__(self, x, y, consts.GRASS_WIDTH, consts.GRASS_HEIGHT)
+    def __init__(self, x, y, ):
+        pygame.Rect.__init__(self, x, y, consts.GRASS_WIDTH,
+                             consts.GRASS_HEIGHT)
         self.image = spray_image
 
 
-#the func returns a list of tuples for where to put the "grass"
+# the func returns a list of tuples for where to put the "grass"
 def choose_random_place_grass():
     places = []
-    for i in range(consts.MINES_COUNT):
-        row = random.randint(consts.SOLDIER_ROWS, consts.WINDOW_WIDTH - consts.FLAG_ROWS - 1)
-        col = random.randint(consts.SOLDIER_COLS, consts.WINDOW_HEIGHT - consts.FLAG_COLS - 1)
-        places.append((row, col))
+    counter = 0
+    while counter < consts.MINES_COUNT:
+        print(consts.WINDOW_WIDTH, consts.GRASS_HEIGHT * consts.CELL_SIZE)
+        print(consts.WINDOW_HEIGHT, consts.GRASS_WIDTH * consts.CELL_SIZE)
+        row = random.randint(0 , consts.WINDOW_HEIGHT)
+        col = random.randint(0,consts.WINDOW_WIDTH)
+        while True:
+            if row > consts.PLAYER_HEIGHT and col > consts.PLAYER_WIDTH and row < consts.WINDOW_HEIGHT - consts.GRASS_HEIGHT and col < consts.WINDOW_WIDTH - consts.GRASS_WIDTH:
+                places.append((row, col))
+                counter +=1
+                break
+            else:
+                row = random.randint(0, consts.WINDOW_HEIGHT)
+                col = random.randint(0, consts.WINDOW_WIDTH)
     return places
-
 
 
 places = choose_random_place_grass()
 
-#the func draw on the board the objects
+
+# the func draw on the board the objects
 def draw():
     window.fill("lightpink")
     window.blit(solider.player_image, solider.player)
-    window.blit(flag_image, (consts.WINDOW_WIDTH-consts.FLAG_WIDTH, consts.WINDOW_HEIGHT-consts.FLAG_HEIGHT))
+    window.blit(flag_image, (consts.WINDOW_WIDTH - consts.FLAG_WIDTH,
+                             consts.WINDOW_HEIGHT - consts.FLAG_HEIGHT))
 
     for i in places:
-        spray = Spray(i[0],i[1])
-        window.blit(spray_image,spray)
+        spray = Spray(i[0], i[1])
+        window.blit(spray_image, spray)
 
 
 def create_screen():
     while True:
         for event in pygame.event.get():
-            if event.type == pygame.QUIT: #user click the x button
+            if event.type == pygame.QUIT:  # user click the x button
                 pygame.quit()
                 exit()
 
-
-            if event.type == pygame.KEYDOWN:#key was pressed
+            if event.type == pygame.KEYDOWN:  # key was pressed
                 print(solider.player.x, solider.player.y)
                 if event.key == pygame.K_UP:
-                    solider.player.y -= consts.CELL_SIZE #y is used to move objects
+                    solider.player.y -= consts.CELL_SIZE  # y is used to move objects
                 if event.key == pygame.K_DOWN:
                     solider.player.y += consts.CELL_SIZE
                 if event.key == pygame.K_LEFT:
                     solider.player.x -= consts.CELL_SIZE
                 if event.key == pygame.K_RIGHT:
                     solider.player.x += consts.CELL_SIZE
-        # keys = pygame.key.get_pressed()
-        # if keys[pygame.K_LEFT]:
-        #     player.x -= consts.CELL_SIZE
-        # if keys[pygame.K_RIGHT]:
-        #     player.x += consts.CELL_SIZE
-        # if keys[pygame.K_UP]:
-        #     player.y -= consts.CELL_SIZE
-        # if keys[pygame.K_DOWN]:
-        #     player.y += consts.CELL_SIZE
+            # keys = pygame.key.get_pressed()
+            # if keys[pygame.K_LEFT]:
+            #     player.x -= consts.CELL_SIZE
+            # if keys[pygame.K_RIGHT]:
+            #     player.x += consts.CELL_SIZE
+            # if keys[pygame.K_UP]:
+            #     player.y -= consts.CELL_SIZE
+            # if keys[pygame.K_DOWN]:
+            #     player.y += consts.CELL_SIZE
 
             draw()
             pygame.display.update()
-            #clock.tick(60)
-
+            # clock.tick(60)
