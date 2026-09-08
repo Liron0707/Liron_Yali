@@ -5,8 +5,10 @@ import pygame
 from sys import exit
 import os
 import consts
+import night_screen
 import solider
 import random
+
 
 pygame.init()
 
@@ -78,6 +80,11 @@ def create_screen():
                     solider.player.x -= consts.CELL_SIZE
                 if event.key == pygame.K_RIGHT and solider.player.x + consts.PLAYER_WIDTH+consts.CELL_SIZE<=consts.WINDOW_WIDTH:
                     solider.player.x += consts.CELL_SIZE
+                #if event.key == pygame.K_SPACE:
+                    #night_screen.create_screen()
+            draw()
+            pygame.display.update()
+            # clock.tick(60)
             # keys = pygame.key.get_pressed()
             # if keys[pygame.K_LEFT]:
             #     player.x -= consts.CELL_SIZE
@@ -87,7 +94,3 @@ def create_screen():
             #     player.y -= consts.CELL_SIZE
             # if keys[pygame.K_DOWN]:
             #     player.y += consts.CELL_SIZE
-
-            draw()
-            pygame.display.update()
-            # clock.tick(60)
