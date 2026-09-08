@@ -35,8 +35,7 @@ def choose_random_place_grass():
     places = []
     counter = 0
     while counter < consts.MINES_COUNT:
-        print(consts.WINDOW_WIDTH, consts.GRASS_HEIGHT * consts.CELL_SIZE)
-        print(consts.WINDOW_HEIGHT, consts.GRASS_WIDTH * consts.CELL_SIZE)
+
         row = random.randint(0 , consts.WINDOW_HEIGHT)
         col = random.randint(0,consts.WINDOW_WIDTH)
         while True:
@@ -73,7 +72,6 @@ def create_screen():
                 exit()
 
             if event.type == pygame.KEYDOWN:  # key was pressed
-                print(solider.player.x, solider.player.y)
                 if event.key == pygame.K_UP:
                     solider.player.y -= consts.CELL_SIZE  # y is used to move objects
                 if event.key == pygame.K_DOWN:
