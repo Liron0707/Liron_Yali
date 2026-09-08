@@ -15,3 +15,6 @@ class Player(pygame.Rect): #חייבת להבין מה קורה פה
         self.image = player_image
 
 player = Player()
+
+def solider_place_tuple():
+    return player.y/20, player.x/20

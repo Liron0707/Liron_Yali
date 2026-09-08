@@ -1,4 +1,5 @@
 from codecs import backslashreplace_errors
+from xml.dom.pulldom import PROCESSING_INSTRUCTION
 
 import pygame
 from sys import exit
@@ -26,8 +27,9 @@ spray_image = pygame.transform.scale(spray_image, (consts.GRASS_WIDTH, consts.GR
 def choose_random_place_grass():
     places = []
     for i in range(consts.MINES_COUNT):
-        row = random.randint(0, consts.BOARD_ROWS - consts.FLAG_ROWS - 1)
-        col = random.randint(0, consts.BOARD_COLS - consts.FLAG_COLS - 1)
+        row = random.randint(0, consts.WINDOW_WIDTH - consts.FLAG_ROWS - 1)
+        col = random.randint(0, consts.WINDOW_HEIGHT - consts.FLAG_COLS - 1)
+        #print(row, col)
         places.append((row, col))
     return places
 
@@ -39,7 +41,9 @@ def draw():
     window.fill("lightpink")
     window.blit(solider.player_image, solider.player)
     window.blit(flag_image, (consts.WINDOW_WIDTH-consts.FLAG_WIDTH, consts.WINDOW_HEIGHT-consts.FLAG_HEIGHT))
-    window.blit(spray_image,)
+    places = choose_random_place_grass()
+    #for i in places:
+        #window.blit(spray_image,i)
 
 
 def create_screen():
@@ -50,7 +54,8 @@ def create_screen():
                 exit()
 
 
-            if event.type == pygame.KEYDOWN: #key was pressed
+            if event.type == pygame.KEYDOWN:#key was pressed
+                print(solider.player.x, solider.player.y)
                 if event.key == pygame.K_UP:
                     solider.player.y -= consts.CELL_SIZE #y is used to move objects
                 if event.key == pygame.K_DOWN:
