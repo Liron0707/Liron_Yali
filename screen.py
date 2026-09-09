@@ -28,11 +28,13 @@ spray_image = pygame.transform.scale(spray_image,
                                      (consts.GRASS_WIDTH, consts.GRASS_HEIGHT))
 
 
+
 class Spray(pygame.Rect):
     def __init__(self, x, y, ):
         pygame.Rect.__init__(self, x, y, consts.GRASS_WIDTH,
                              consts.GRASS_HEIGHT)
         self.image = spray_image
+
 
 
 # the func returns a list of tuples for where to put the "grass"
@@ -43,7 +45,7 @@ def choose_random_place_grass():
         row = random.randint(0 , consts.WINDOW_WIDTH)
         col = random.randint(0,consts.WINDOW_HEIGHT)
         while True:
-            if row > consts.PLAYER_HEIGHT and col > consts.PLAYER_WIDTH and row < consts.WINDOW_WIDTH - consts.GRASS_HEIGHT and col < consts.WINDOW_HEIGHT - consts.GRASS_WIDTH:
+            if row > consts.PLAYER_HEIGHT and col > consts.PLAYER_WIDTH and row < consts.WINDOW_WIDTH - consts.GRASS_HEIGHT and col < consts.WINDOW_HEIGHT - consts.GRASS_WIDTH and row != consts.WINDOW_WIDTH-consts.FLAG_WIDTH and col != consts.WINDOW_HEIGHT-consts.FLAG_HEIGHT:
                 places.append((row, col))
                 counter +=1
                 break
@@ -93,14 +95,14 @@ def draw_message(message, font_size, color, location):
 
 
 def create_screen(game_state):
-    if game_state["state"] == consts.LOSE_STATE:
-         draw_lose_message()
-    if game_state["state"] == consts.WIN_STATE:
-        draw_win_message()
+        if game_state["state"] == consts.LOSE_STATE:
+            draw_lose_message()
+        if game_state["state"] == consts.WIN_STATE:
+            draw_win_message()
 
 
-    draw()
-    pygame.display.update()
+        draw()
+        pygame.display.update()
             # clock.tick(60)
             # keys = pygame.key.get_pressed()
             # if keys[pygame.K_LEFT]:
