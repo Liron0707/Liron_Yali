@@ -49,5 +49,4 @@ def main():
             screen.draw_win_message()
             state["state"] = consts.WIN_STATE
 
-
 main()
