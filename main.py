@@ -17,8 +17,7 @@ def main():
     game_board = []
     game_field.create_board(game_board)
     game_field.set_flag_on_board(game_board)
-    mines_list = game_field.set_mines_on_board(game_board)
-    print(mines_list)
+    game_field.set_mines_on_board(game_board)
 
     while state["is_window_open"] and state["state"] == consts.RUNNING_STATE:
         screen.create_screen()

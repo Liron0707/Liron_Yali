@@ -5,6 +5,7 @@ import pygame
 from sys import exit
 import os
 import consts
+import game_field
 import solider
 import random
 
@@ -45,11 +46,11 @@ def draw(mine_list):
 
 def draw_mines(mine_list):
     for mine in mine_list:
-        mine_to_screen= Mine(mine[0]*consts.CELL_SIZE, mine[1]*consts.CELL_SIZE)
+        mine_to_screen= Mine(mine[1]*consts.CELL_SIZE, mine[0]*consts.CELL_SIZE)
         window.blit(mine_image, mine_to_screen)
 
 
-def create_screen(mine_list):
+def create_screen():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # user click the x button
@@ -57,6 +58,6 @@ def create_screen(mine_list):
                 exit()
 
 
-            draw(mine_list)
+            draw(game_field.mine_list)
             pygame.display.update()
             # clock.tick(60)
