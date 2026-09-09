@@ -28,11 +28,13 @@ spray_image = pygame.transform.scale(spray_image,
                                      (consts.GRASS_WIDTH, consts.GRASS_HEIGHT))
 
 
+
 class Spray(pygame.Rect):
     def __init__(self, x, y, ):
         pygame.Rect.__init__(self, x, y, consts.GRASS_WIDTH,
                              consts.GRASS_HEIGHT)
         self.image = spray_image
+
 
 
 # the func returns a list of tuples for where to put the "grass"
@@ -43,7 +45,7 @@ def choose_random_place_grass():
         row = random.randint(0 , consts.WINDOW_WIDTH)
         col = random.randint(0,consts.WINDOW_HEIGHT)
         while True:
-            if row > consts.PLAYER_HEIGHT and col > consts.PLAYER_WIDTH and row < consts.WINDOW_WIDTH - consts.GRASS_HEIGHT and col < consts.WINDOW_HEIGHT - consts.GRASS_WIDTH:
+            if row > consts.PLAYER_HEIGHT and col > consts.PLAYER_WIDTH and row < consts.WINDOW_WIDTH - consts.GRASS_HEIGHT and col < consts.WINDOW_HEIGHT - consts.GRASS_WIDTH and row != consts.WINDOW_WIDTH-consts.FLAG_WIDTH and col != consts.WINDOW_HEIGHT-consts.FLAG_HEIGHT:
                 places.append((row, col))
                 counter +=1
                 break
@@ -82,6 +84,8 @@ def draw_message(message, font_size, color, location):
     font = pygame.font.SysFont(consts.FONT_NAME, font_size)
     text_img = font.render(message, True, color)
     window.blit(text_img, location)
+    pygame.display.update()
+    time.sleep(1)
 
 
 def create_screen(game_state):
