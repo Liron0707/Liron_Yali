@@ -85,6 +85,7 @@ def draw_message(message, font_size, color, location):
     pygame.display.update()
     time.sleep(1)
 
+
 def create_screen(game_state):
     if game_state["state"] == consts.LOSE_STATE:
          draw_lose_message()
