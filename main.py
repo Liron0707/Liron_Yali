@@ -11,6 +11,7 @@ state = {
     "state": consts.RUNNING_STATE,
 }
 
+# event handler for typing keys
 def event_handler():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:  # user click the x button
@@ -29,6 +30,8 @@ def event_handler():
             if event.key == pygame.K_SPACE:
                 night_screen.create_screen()
 
+
+# main function, calls all functions
 def main():
     game_board = []
     game_field.create_board(game_board)

@@ -16,6 +16,7 @@ class Player(pygame.Rect): #חייבת להבין מה קורה פה
 
 player = Player()
 
+# returns the row and column of the player from its coordinates
 def solider_place_tuple(self):
     return self.y//20, self.x//20
 
