@@ -83,6 +83,7 @@ def draw_message(message, font_size, color, location):
     text_img = font.render(message, True, color)
     window.blit(text_img, location)
 
+
 def create_screen(game_state):
         if game_state["state"] == consts.LOSE_STATE:
             draw_lose_message()
