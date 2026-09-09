@@ -85,8 +85,8 @@ def create_screen():
                     solider.player.x += consts.CELL_SIZE
                 if event.key == pygame.K_SPACE:
                     night_screen.create_screen()
-                    pygame.time.wait(1)
-                    create_screen()
+
+
 
             draw()
             pygame.display.update()
