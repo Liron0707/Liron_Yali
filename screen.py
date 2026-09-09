@@ -11,8 +11,7 @@ import consts
 import night_screen
 import solider
 import random
-import game_field
-from main import state
+
 
 pygame.init()
 
@@ -85,18 +84,15 @@ def draw_message(message, font_size, color, location):
     window.blit(text_img, location)
 
 def create_screen(game_state):
+        if game_state["state"] == consts.LOSE_STATE:
+            draw_lose_message()
+        if game_state["state"] == consts.WIN_STATE:
+            draw_win_message()
 
-    if game_state["state"] == consts.LOSE_STATE:
-        print("sfreen")
-        draw_lose_message()
 
-    if game_state["state"] == consts.WIN_STATE:
-        draw_win_message()
-
-    draw()
-    pygame.display.update()
-
-        # clock.tick(60)
+        draw()
+        pygame.display.update()
+            # clock.tick(60)
             # keys = pygame.key.get_pressed()
             # if keys[pygame.K_LEFT]:
             #     player.x -= consts.CELL_SIZE

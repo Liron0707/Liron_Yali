@@ -36,6 +36,7 @@ def main():
     game_field.set_mines_on_board(game_board)
 
     while state["is_window_open"] and state["state"] == consts.RUNNING_STATE:
+        event_handler()
         screen.create_screen(state)
         event_handler()
         player_touch_flag = game_field.is_touching_flag(game_board,solider.solider_place_tuple(solider.player))
