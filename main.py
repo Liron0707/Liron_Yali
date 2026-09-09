@@ -1,3 +1,5 @@
+from turtle import Screen
+
 import pygame
 
 import consts
@@ -44,6 +46,10 @@ def main():
         if player_touch_mine:
             state["state"] = consts.LOSE_STATE
             print(state["state"])
+            if state["state"] == consts.LOSE_STATE:
+                screen.draw_lose_message()
+            if state["state"] == consts.WIN_STATE:
+                screen.draw_win_message()
         elif player_touch_flag:
             state["state"] = consts.WIN_STATE
             print(state["state"])

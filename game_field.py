@@ -65,6 +65,7 @@ def is_touching_flag(game_board, soldier_cell):
                          soldier_cell[1] + consts.SOLDIER_COLS):
             if game_board[row][col] == consts.FLAG:
                 return True
+    return False
 
 
 # returns true if the soldier touches a mine
@@ -74,7 +75,7 @@ def is_touching_mine(game_board, soldier_cell):
         for col in range(soldier_cell[1],
                          soldier_cell[1] + consts.SOLDIER_COLS):
             if game_board[row][col] == consts.MINE:
-                return True
+                 return True
     return False
 
 

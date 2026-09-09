@@ -82,12 +82,10 @@ def draw_message(message, font_size, color, location):
     font = pygame.font.SysFont(consts.FONT_NAME, font_size)
     text_img = font.render(message, True, color)
     window.blit(text_img, location)
+    pygame.display.update()
+    time.sleep(2)
 
 def create_screen(game_state):
-        if game_state["state"] == consts.LOSE_STATE:
-            draw_lose_message()
-        if game_state["state"] == consts.WIN_STATE:
-            draw_win_message()
 
 
         draw()
