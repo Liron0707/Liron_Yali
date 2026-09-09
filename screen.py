@@ -67,7 +67,25 @@ def draw():
         spray = Spray(i[0], i[1])
         window.blit(spray_image, spray)
 
-def create_screen():
+
+
+def draw_lose_message():
+    draw_message(consts.LOSE_MESSAGE, consts.LOSE_FONT_SIZE,
+                 consts.LOSE_COLOR, consts.LOSE_LOCATION)
+
+
+def draw_win_message():
+    draw_message(consts.WIN_MESSAGE, consts.WIN_FONT_SIZE,
+                 consts.WIN_COLOR, consts.WIN_LOCATION)
+
+
+def draw_message(message, font_size, color, location):
+    font = pygame.font.SysFont(consts.FONT_NAME, font_size)
+    text_img = font.render(message, True, color)
+    window.blit(text_img, location)
+
+
+def create_screen(game_state):
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # user click the x button
@@ -85,9 +103,13 @@ def create_screen():
                     solider.player.x += consts.CELL_SIZE
                 if event.key == pygame.K_SPACE:
                     night_screen.create_screen()
-                    pygame.time.wait(1)
-                    create_screen()
 
+
+            if game_state["state"] == consts.LOSE_STATE:
+                draw_lose_message()
+
+            if game_state["state"] == consts.WIN_STATE:
+                draw_win_message()
             draw()
             pygame.display.update()
             # clock.tick(60)

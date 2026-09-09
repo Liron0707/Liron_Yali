@@ -20,10 +20,15 @@ def main():
     game_field.set_mines_on_board(game_board)
 
     while state["is_window_open"] and state["state"] == consts.RUNNING_STATE:
-        screen.create_screen()
-        player_touch = game_field.is_touching_flag(game_board,solider.solider_place_tuple())
-        if player_touch:
+        screen.create_screen(state)
+        player_touch_flag = game_field.is_touching_flag(game_board,solider.solider_place_tuple(solider.player))
+        player_touch_mine = game_field.is_touching_mine(game_board, solider.solider_place_tuple(solider.player))
+        if player_touch_mine:
             state["state"] = consts.LOSE_STATE
-            state["is_window_open"] = False
+            print(state["state"])
+        elif player_touch_flag:
+            state["state"] = consts.WIN_STATE
+            print(state["state"])
+
 
 main()

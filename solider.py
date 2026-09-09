@@ -16,6 +16,6 @@ class Player(pygame.Rect): #חייבת להבין מה קורה פה
 
 player = Player()
 
-def solider_place_tuple():
-    return player.y/20, player.x/20
+def solider_place_tuple(self):
+    return self.player.x/20, self.player.y/20
 
