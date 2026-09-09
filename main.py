@@ -1,5 +1,3 @@
-from turtle import Screen
-
 import pygame
 
 import consts
@@ -40,19 +38,16 @@ def main():
     while state["is_window_open"] and state["state"] == consts.RUNNING_STATE:
         event_handler()
         screen.create_screen(state)
-        event_handler()
-        player_touch_flag = game_field.is_touching_flag(game_board,solider.solider_place_tuple(solider.player))
         player_touch_mine = game_field.is_touching_mine(game_board, solider.solider_place_tuple(solider.player))
+        player_touch_flag = game_field.is_touching_flag(game_board,solider.solider_place_tuple(solider.player))
         if player_touch_mine:
+            print("mine")
+            screen.draw_lose_message()
             state["state"] = consts.LOSE_STATE
-            print(state["state"])
-            if state["state"] == consts.LOSE_STATE:
-                screen.draw_lose_message()
-            if state["state"] == consts.WIN_STATE:
-                screen.draw_win_message()
         elif player_touch_flag:
+            print("flag")
+            screen.draw_win_message()
             state["state"] = consts.WIN_STATE
-            print(state["state"])
 
 
 main()
