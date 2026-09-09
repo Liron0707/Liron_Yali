@@ -27,6 +27,9 @@ spray_image = pygame.image.load(os.path.join("bin", "spray.PNG"))
 spray_image = pygame.transform.scale(spray_image,
                                      (consts.GRASS_WIDTH, consts.GRASS_HEIGHT))
 
+background_image = pygame.image.load(os.path.join("bin", "back2.png"))
+background_image = pygame.transform.scale(background_image,(consts.WINDOW_WIDTH,consts.WINDOW_HEIGHT))
+
 
 
 class Spray(pygame.Rect):
@@ -61,6 +64,7 @@ places = choose_random_place_grass()
 # the func draw on the board the objects
 def draw():
     window.fill("lightpink")
+    window.blit(background_image,(0,0))
     window.blit(solider.player_image, solider.player)
     window.blit(flag_image, (consts.WINDOW_WIDTH - consts.FLAG_WIDTH,
                              consts.WINDOW_HEIGHT - consts.FLAG_HEIGHT))
