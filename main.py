@@ -34,6 +34,9 @@ def main():
     game_field.create_board(game_board)
     game_field.set_flag_on_board(game_board)
     game_field.set_mines_on_board(game_board)
+    start_sound = pygame.mixer.Sound(
+            "C:\\Users\jbt\PycharmProjects\Liron_Yali\sound\start_sound.ogg")
+    pygame.mixer.Sound.play(start_sound)
 
     while state["is_window_open"] and state["state"] == consts.RUNNING_STATE:
         event_handler()
