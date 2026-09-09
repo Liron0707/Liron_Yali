@@ -71,11 +71,17 @@ def draw():
 
 
 def draw_lose_message():
+    lose_sound = pygame.mixer.Sound(
+        "C:\\Users\jbt\PycharmProjects\Liron_Yali\sound\lose_sound.ogg")
+    pygame.mixer.Sound.play(lose_sound)
     draw_message(consts.LOSE_MESSAGE, consts.LOSE_FONT_SIZE,
                  consts.LOSE_COLOR, consts.LOSE_LOCATION)
 
 
 def draw_win_message():
+    win_sound = pygame.mixer.Sound(
+            "C:\\Users\jbt\PycharmProjects\Liron_Yali\sound\win_sound.ogg")
+    pygame.mixer.Sound.play(win_sound)
     draw_message(consts.WIN_MESSAGE, consts.WIN_FONT_SIZE,
                  consts.WIN_COLOR, consts.WIN_LOCATION)
 
@@ -85,7 +91,7 @@ def draw_message(message, font_size, color, location):
     text_img = font.render(message, True, color)
     window.blit(text_img, location)
     pygame.display.update()
-    time.sleep(1)
+    time.sleep(5)
 
 
 def create_screen(game_state):
