@@ -11,7 +11,23 @@ state = {
     "state": consts.RUNNING_STATE,
 }
 
+def event_handler():
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:  # user click the x button
+            pygame.quit()
+            exit()
 
+        if event.type == pygame.KEYDOWN:  # key was pressed
+            if event.key == pygame.K_UP and solider.player.y - consts.CELL_SIZE >= 0:
+                solider.player.y -= consts.CELL_SIZE  # y is used to move objects
+            if event.key == pygame.K_DOWN and solider.player.y + consts.PLAYER_HEIGHT + consts.CELL_SIZE <= consts.WINDOW_HEIGHT:
+                solider.player.y += consts.CELL_SIZE
+            if event.key == pygame.K_LEFT and solider.player.x - consts.CELL_SIZE >= 0:
+                solider.player.x -= consts.CELL_SIZE
+            if event.key == pygame.K_RIGHT and solider.player.x + consts.PLAYER_WIDTH + consts.CELL_SIZE <= consts.WINDOW_WIDTH:
+                solider.player.x += consts.CELL_SIZE
+            if event.key == pygame.K_SPACE:
+                night_screen.create_screen()
 
 def main():
     game_board = []
@@ -21,6 +37,7 @@ def main():
 
     while state["is_window_open"] and state["state"] == consts.RUNNING_STATE:
         screen.create_screen(state)
+        event_handler()
         player_touch_flag = game_field.is_touching_flag(game_board,solider.solider_place_tuple(solider.player))
         player_touch_mine = game_field.is_touching_mine(game_board, solider.solider_place_tuple(solider.player))
         if player_touch_mine:

@@ -11,7 +11,8 @@ import consts
 import night_screen
 import solider
 import random
-
+import game_field
+from main import state
 
 pygame.init()
 
@@ -84,34 +85,18 @@ def draw_message(message, font_size, color, location):
     window.blit(text_img, location)
 
 def create_screen(game_state):
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:  # user click the x button
-                pygame.quit()
-                exit()
 
-            if event.type == pygame.KEYDOWN:  # key was pressed
-                if event.key == pygame.K_UP and solider.player.y -consts.CELL_SIZE>=0:
-                    solider.player.y -= consts.CELL_SIZE  # y is used to move objects
-                if event.key == pygame.K_DOWN and solider.player.y + consts.PLAYER_HEIGHT + consts.CELL_SIZE<=consts.WINDOW_HEIGHT:
-                    solider.player.y += consts.CELL_SIZE
-                if event.key == pygame.K_LEFT and solider.player.x -consts.CELL_SIZE>=0:
-                    solider.player.x -= consts.CELL_SIZE
-                if event.key == pygame.K_RIGHT and solider.player.x + consts.PLAYER_WIDTH+consts.CELL_SIZE<=consts.WINDOW_WIDTH:
-                    solider.player.x += consts.CELL_SIZE
-                if event.key == pygame.K_SPACE:
-                    night_screen.create_screen()
+    if game_state["state"] == consts.LOSE_STATE:
+        print("sfreen")
+        draw_lose_message()
 
-            if game_state["state"] == consts.LOSE_STATE:
-                draw_lose_message()
+    if game_state["state"] == consts.WIN_STATE:
+        draw_win_message()
 
-            if game_state["state"] == consts.WIN_STATE:
-                draw_win_message()
+    draw()
+    pygame.display.update()
 
-
-            draw()
-            pygame.display.update()
-            # clock.tick(60)
+        # clock.tick(60)
             # keys = pygame.key.get_pressed()
             # if keys[pygame.K_LEFT]:
             #     player.x -= consts.CELL_SIZE
