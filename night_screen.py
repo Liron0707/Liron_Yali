@@ -1,17 +1,12 @@
-from codecs import backslashreplace_errors
 from datetime import time
-from xml.dom.pulldom import PROCESSING_INSTRUCTION
 
 import pygame
 from sys import exit
 import os
-
 import time
-
 import consts
 import game_field
 import solider
-import random
 
 pygame.init()
 
@@ -47,14 +42,14 @@ def draw(mine_list):
 
 
 
-
+# draws the grid lines on the screen
 def draw_mines(mine_list):
     for mine in mine_list:
         mine_to_screen= Mine(mine[1]*consts.CELL_SIZE, mine[0]*consts.CELL_SIZE)
         window.blit(mine_image, mine_to_screen)
         window.blit(solider.player.image, solider.player)
 
-
+# creates the night screen
 def create_screen():
     temp = True
     while temp == True:

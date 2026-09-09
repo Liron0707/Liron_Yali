@@ -11,6 +11,7 @@ state = {
     "state": consts.RUNNING_STATE,
 }
 
+# event handler for typing keys
 def event_handler():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:  # user click the x button
@@ -29,11 +30,16 @@ def event_handler():
             if event.key == pygame.K_SPACE:
                 night_screen.create_screen()
 
+
+# main function, calls all functions
 def main():
     game_board = []
     game_field.create_board(game_board)
     game_field.set_flag_on_board(game_board)
     game_field.set_mines_on_board(game_board)
+    start_sound = pygame.mixer.Sound(
+            "C:\\Users\jbt\PycharmProjects\Liron_Yali\sound\start_sound.ogg")
+    pygame.mixer.Sound.play(start_sound)
 
     while state["is_window_open"] and state["state"] == consts.RUNNING_STATE:
         event_handler()

@@ -74,6 +74,7 @@ def draw():
         window.blit(spray_image, spray)
 
 
+# draws lose massage on screen
 def draw_lose_message():
     lose_sound = pygame.mixer.Sound(
         "C:\\Users\jbt\PycharmProjects\Liron_Yali\sound\lose_sound.ogg")
@@ -81,7 +82,7 @@ def draw_lose_message():
     draw_message(consts.LOSE_MESSAGE, consts.LOSE_FONT_SIZE,
                  consts.LOSE_COLOR, consts.LOSE_LOCATION)
 
-
+# draws win massage on screen
 def draw_win_message():
     win_sound = pygame.mixer.Sound(
             "C:\\Users\jbt\PycharmProjects\Liron_Yali\sound\win_sound.ogg")
@@ -89,7 +90,7 @@ def draw_win_message():
     draw_message(consts.WIN_MESSAGE, consts.WIN_FONT_SIZE,
                  consts.WIN_COLOR, consts.WIN_LOCATION)
 
-
+# draws a wanted massage on screen
 def draw_message(message, font_size, color, location):
     font = pygame.font.SysFont(consts.FONT_NAME, font_size)
     text_img = font.render(message, True, color)
@@ -97,23 +98,12 @@ def draw_message(message, font_size, color, location):
     pygame.display.update()
     time.sleep(5)
 
-
+# creates main screen
 def create_screen(game_state):
-        if game_state["state"] == consts.LOSE_STATE:
-            draw_lose_message()
-        if game_state["state"] == consts.WIN_STATE:
-            draw_win_message()
+    if game_state["state"] == consts.LOSE_STATE:
+        draw_lose_message()
+    if game_state["state"] == consts.WIN_STATE:
+        draw_win_message()
 
-
-        draw()
-        pygame.display.update()
-            # clock.tick(60)
-            # keys = pygame.key.get_pressed()
-            # if keys[pygame.K_LEFT]:
-            #     player.x -= consts.CELL_SIZE
-            # if keys[pygame.K_RIGHT]:
-            #     player.x += consts.CELL_SIZE
-            # if keys[pygame.K_UP]:
-            #     player.y -= consts.CELL_SIZE
-            # if keys[pygame.K_DOWN]:
-            #     player.y += consts.CELL_SIZE
+    draw()
+    pygame.display.update()
