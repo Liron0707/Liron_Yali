@@ -1,9 +1,13 @@
 from codecs import backslashreplace_errors
+from datetime import time
 from xml.dom.pulldom import PROCESSING_INSTRUCTION
 
 import pygame
 from sys import exit
 import os
+
+import time
+
 import consts
 import game_field
 import solider
@@ -48,10 +52,12 @@ def draw_mines(mine_list):
     for mine in mine_list:
         mine_to_screen= Mine(mine[1]*consts.CELL_SIZE, mine[0]*consts.CELL_SIZE)
         window.blit(mine_image, mine_to_screen)
+        window.blit(solider.player.image, solider.player)
 
 
 def create_screen():
-    while True:
+    temp = True
+    while temp == True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # user click the x button
                 pygame.quit()
@@ -60,4 +66,7 @@ def create_screen():
 
             draw(game_field.mine_list)
             pygame.display.update()
+            time.sleep(1)
+            temp = False
+
             # clock.tick(60)
