@@ -43,7 +43,7 @@ def mark_mine_on_board(game_board, mine_cell):
             game_board[row][col] = consts.MINE
 
 
-# sets the mines on the board and returns the list of mine starting cells
+# sets the mines on the board and updates the list of mine starting cells
 def set_mines_on_board(game_board):
     mine_marked = 0
     while mine_marked < consts.MINES_COUNT:
